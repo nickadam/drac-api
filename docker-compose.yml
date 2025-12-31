@@ -1,0 +1,21 @@
+services:
+  api:
+    image: nickadam/drac-api:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      API_KEY_FILE: /run/secrets/drac_api_key
+    ports:
+      - target: 8080
+        published: 3000
+        mode: host
+    secrets:
+      - drac_password
+      - drac_api_key
+
+secrets:
+  drac_password:
+    external: true
+  drac_api_key:
+    external: true
